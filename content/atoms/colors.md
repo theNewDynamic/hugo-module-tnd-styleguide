@@ -2,7 +2,7 @@
 title: Colors
 layout: colors
 colors: 
- - primary
- - gray
- - blue
+  - primary
+  - secondary
+  - tertiary
 ---

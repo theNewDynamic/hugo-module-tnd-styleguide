@@ -1,0 +1,7 @@
+{{ $colors := slice }}
+{{ with resources.Get "css/colors.json" }}
+  {{ with .Content | transform.Unmarshal }}
+    {{ $colors = . }}
+  {{ end }}
+{{ end }}
+{{ return $colors }}

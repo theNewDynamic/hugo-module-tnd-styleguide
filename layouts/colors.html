@@ -5,32 +5,37 @@
 
 
   */}}
-{{ range $index, $color := .Params.colors }}
-<div class="grid gap-6 lg:grid-cols-9 mb-16">
-  {{ range seq 1 9 }}
-    <div>
-      {{ $color := printf "%s-%x00" $color . }}
-      {{ $classes := slice }}
-      {{ $classes = $classes | append (print "bg-" $color) }}
-      {{ $text := "text-inherit" }}
-      {{ if gt . 4 }}
-        {{ $text = "text-white" }}
-      {{ end }}
-      {{ $classes = $classes | append $text }}
-      {{ $border := "gray-100" }}
-      {{ if eq $color $border }}
-        {{ $classes = $classes | append "border border-gray-200" }}
-      {{ end }}
-      {{ $class := delimit $classes " " }}
-      <div class="h-48 p-2 {{ $class }}"> 
-        {{ $color }}
+{{ $colors := partialCached "tnd-styleguide/func/GetColors" . "func/GetColors" }}
+{{ range $color := .Params.colors }}
+  {{ with index $colors $color }}
+  <div class="text-lg mb-4 font-bold uppercase">{{ $color | humanize }}</div>
+  <div class="grid gap-6 lg:grid-cols-9 mb-16">
+    {{ range $shade, $hex := . }}
+      <div>
+        {{ $color_string := print $color "-" $shade }}
+        {{ $classes := slice }}
+        {{ $classes = $classes | append (print "bg-" $color_string) }}
+        {{ $text := "text-inherit" }}
+        {{ if gt $shade 400 }}
+          {{ $text = "text-white" }}
+        {{ end }}
+        {{ $classes = $classes | append $text }}
+        {{ $border := "gray-100" }}
+        {{ if eq $color_string $border }}
+          {{ $classes = $classes | append "border border-gray-200" }}
+        {{ end }}
+        {{ $class := delimit $classes " " }}
+        <div class="h-48 p-2 {{ $class }}"> 
+          {{ $color_string }}
+        </div>
+        <div class="bg-white p-2">			
+          {{ $hex }}
+        </div>
       </div>
-      <div class="bg-white p-2">			
-        bg-{{ $color }}
-      </div>
-    </div>
+    {{ end }}
+  </div>
   {{ end }}
-</div>
+
 {{ end }}
 
 
