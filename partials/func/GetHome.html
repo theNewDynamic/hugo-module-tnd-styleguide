@@ -1,0 +1,6 @@
+{{ $home := dict }}
+{{ with site.GetPage "/styleguide" }}
+  {{ $home = . }}
+{{ end }}
+
+{{ return $home }}
