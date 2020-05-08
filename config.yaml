@@ -1,8 +1,5 @@
 module:
   mounts:
-    - source: content
-      target: content/styleguide
-      lang: en
     - source: layouts
       target: layouts/styleguide
     - source: partials
