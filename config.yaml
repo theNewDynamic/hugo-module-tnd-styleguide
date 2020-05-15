@@ -4,3 +4,6 @@ module:
       target: layouts/styleguide
     - source: partials
       target: layouts/partials/tnd-styleguide
+    - source: cms
+      target: static/styleguide/cms
+      lang: en

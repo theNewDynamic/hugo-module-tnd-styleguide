@@ -1,2 +1,14 @@
-{{ .Content  }}
-    
+{{ with .Params.code_examples }}
+  {{ range . }}
+    {{ with .title }}
+      <h4>{{ . }}</h4>
+    {{ end }}
+    {{ with .html_code }}
+    <div>
+      {{ . | safeHTML }}
+    </div>
+    {{ end }}
+  {{ end }}
+{{ else }}
+{{ .Content }}
+{{ end }}

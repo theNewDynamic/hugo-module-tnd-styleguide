@@ -1,0 +1,37 @@
+backend:
+  name: git-gateway
+show_preview_links: true
+local_backend: true
+use_graphql: true
+media_folder: static/uploads
+public_folder: /uploads
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "_"
+collections:
+- name: "Atoms"
+  label: "atoms"
+  folder: "content/en/styleguide/atoms"
+  filter: { field: "exclude_collection" }
+  create: true
+  summary: '{{title}}'
+  editor:
+    preview: false
+  fields:
+    - name: title
+      label: Title
+      widget: string
+    - label: "Code Examples"
+      name: "code_examples"
+      widget: "list"
+      summary: '{{title}}'
+      fields: 
+        - name: title
+          label: Title
+          widget: string
+        - label: HTML
+          name: html_code
+          widget: code
+          default_language: html
+          output_code_only: true
